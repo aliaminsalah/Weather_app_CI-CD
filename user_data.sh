@@ -30,4 +30,4 @@ chmod 700 /root/.ssh
 #git clone git@github.com:aliaminsalah/project.git
 
 
-#docker pull aliamin10/webweather:latest
+docker pull aliamin10/webweather:latest
