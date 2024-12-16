@@ -40,11 +40,6 @@
         groups: docker
         append: yes
 
-    - name: Clone Git repository
-      git:
-        repo: "https://github.com/octocat/Hello-World.git"
-        dest: "/opt/hello-world-repo"
-
     - name: Pull small Docker image
       docker_image:
         name: "alpine"
