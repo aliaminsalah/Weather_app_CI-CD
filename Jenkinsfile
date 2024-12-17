@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = 'aliamin10'    // Your Docker Hub username
+        DOCKER_REGISTRY = 'aliamin10'    // Docker Hub username
         IMAGE_NAME = 'webweather'       // Docker image name
         CONTAINER_NAME = 'weather-app'  // Docker container name
         DOCKER_PORT = '5000'            // Application port
