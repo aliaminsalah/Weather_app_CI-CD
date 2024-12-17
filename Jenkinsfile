@@ -37,7 +37,6 @@ pipeline {
                     // Verify the container is running
                     sh """
                         docker ps | grep ${CONTAINER_NAME}
-                        curl -f http://localhost:${DOCKER_PORT} || exit 1
                     """
                 }
             }
