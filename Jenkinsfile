@@ -6,6 +6,7 @@ pipeline {
         IMAGE_NAME = 'webweather'        // Docker image name
         CONTAINER_NAME = 'weather-app'   // Docker container name
         DOCKER_PORT = '5000'             // Application port
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
 
     stages {
