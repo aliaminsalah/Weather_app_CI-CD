@@ -3,10 +3,9 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = 'aliamin10'    // Your Docker Hub username
-        IMAGE_NAME = 'webweather'        // Docker image name
-        CONTAINER_NAME = 'weather-app'   // Docker container name
-        DOCKER_PORT = '5000'             // Application port
-        ANSIBLE_HOST_KEY_CHECKING = 'False'
+        IMAGE_NAME = 'webweather'       // Docker image name
+        CONTAINER_NAME = 'weather-app'  // Docker container name
+        DOCKER_PORT = '5000'            // Application port
     }
 
     stages {
@@ -46,16 +45,12 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
-                    // Uncomment and add docker login if necessary
-                    // withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    //     sh """
-                    //         docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-                    //         docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-                    //     """
-                    // }
-                    sh """
-                        echo "Image pushed successfully."
-                    """
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh """
+                            docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+                            docker push ${IMAGE_NAME}:latest
+                        """
+                    }
                 }
             }
         }
@@ -64,11 +59,9 @@ pipeline {
             steps {
                 script {
                     // Assuming inventory and playbook.yml files are available
-                    withCredentials([sshUserPrivateKey(credentialsId: 'my-ssh-key', keyFileVariable: 'SSH_KEY')]) {
-                        sh """
-                            ANSIBLE_PRIVATE_KEY_FILE=${SSH_KEY} ansible-playbook -i inventory playbook.yml
-                        """
-                    }
+                    sh """
+                        ansible-playbook -i inventory playbook.yml
+                    """
                 }
             }
         }
@@ -79,8 +72,8 @@ pipeline {
             script {
                 // Cleanup any resources used
                 sh """
-                    docker rm -f ${CONTAINER_NAME} || echo "Container cleanup failed"
-                    docker rmi ${IMAGE_NAME}:latest || echo "Image cleanup failed"
+                    docker rm -f ${CONTAINER_NAME} || true
+                    docker rmi ${IMAGE_NAME}:latest || true
                 """
             }
         }
