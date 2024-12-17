@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest .
+                        docker build -t ${IMAGE_NAME}:latest .
                     """
                 }
             }
@@ -64,9 +64,11 @@ pipeline {
             steps {
                 script {
                     // Assuming inventory and playbook.yml files are available
-                    sh """
-                        ansible-playbook -i inventory playbook.yml
-                    """
+                    withCredentials([sshUserPrivateKey(credentialsId: 'my-ssh-key', keyFileVariable: 'SSH_KEY')]) {
+                        sh """
+                            ANSIBLE_PRIVATE_KEY_FILE=${SSH_KEY} ansible-playbook -i inventory playbook.yml
+                        """
+                    }
                 }
             }
         }
@@ -77,8 +79,8 @@ pipeline {
             script {
                 // Cleanup any resources used
                 sh """
-                    docker rm -f ${CONTAINER_NAME} || true
-                    docker rmi ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
+                    docker rm -f ${CONTAINER_NAME} || echo "Container cleanup failed"
+                    docker rmi ${IMAGE_NAME}:latest || echo "Image cleanup failed"
                 """
             }
         }
