@@ -75,7 +75,8 @@ pipeline {
             script {
                 // Cleanup any resources used
                 sh """
-                    docker rmi ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
+                    docker rm --force ${CONTAINER_NAME} || true
+                    docker rmi --force ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
                     docker logout || true
                 """
             }
