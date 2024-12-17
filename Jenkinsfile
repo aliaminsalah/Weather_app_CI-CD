@@ -24,7 +24,6 @@ pipeline {
                 script {
                     // Ensure any existing container is removed
                     sh """
-                        docker rm -f ${CONTAINER_NAME} || true
                         docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
                     """
                 }
