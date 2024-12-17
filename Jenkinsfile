@@ -63,7 +63,7 @@ pipeline {
                 script {
                     // Assuming inventory and playbook.yml files are available
                     sh """
-                        sudo ansible-playbook -i inventory playbook.yml
+                        ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory playbook.yml
                     """
                 }
             }
