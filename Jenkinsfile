@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY = 'aliamin10'    // Your Docker Hub username
-        IMAGE_NAME = 'webweather'       // Docker image name
-        CONTAINER_NAME = 'weather-app'  // Docker container name
-        DOCKER_PORT = '5000'            // Application port
+        IMAGE_NAME = 'webweather'        // Docker image name
+        CONTAINER_NAME = 'weather-app'   // Docker container name
+        DOCKER_PORT = '5000'             // Application port
     }
 
     stages {
@@ -46,15 +46,16 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
+                    // Uncomment and add docker login if necessary
                     // withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        //sh """
-                             // docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-                             // docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-                        //""" 
+                    //     sh """
+                    //         docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+                    //         docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
+                    //     """
+                    // }
                     sh """
-                    echo  "Image pushed successfully."
+                        echo "Image pushed successfully."
                     """
-                    }
                 }
             }
         }
