@@ -22,8 +22,12 @@ Docker Hub (for image storage)
 AWS Account (for EC2 instances)
 ## Credentials:
 
-Jenkins credentials with Docker Hub username and token.
+Jenkins credentials with Docker Hub username and token:
+From manage jenkins >>> credentials 
+![image](https://github.com/user-attachments/assets/9b0724c4-b237-47c6-9c1d-70e47d08cf22)
+
 AWS credentials configured for the CLI.
+
 ## Steps to Setup
 ## 1. Initial Work on Local Machine
 Code Handling:
