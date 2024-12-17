@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker build --no-cache -t ${IMAGE_NAME}:latest .
+                        docker build --no-cache -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest .
                     """
                 }
             }
@@ -24,6 +24,7 @@ pipeline {
                 script {
                     // Ensure any existing container is removed
                     sh """
+                        docker rm -f ${CONTAINER_NAME} || true
                         docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
                     """
                 }
@@ -47,7 +48,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh """
                             echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin
-                            docker push ${IMAGE_NAME}:latest
+                            docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
                         """
                     }
                 }
@@ -71,7 +72,7 @@ pipeline {
             script {
                 // Cleanup any resources used
                 sh """
-                    docker rmi ${IMAGE_NAME}:latest || true
+                    docker rmi ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
                     docker logout || true
                 """
             }
