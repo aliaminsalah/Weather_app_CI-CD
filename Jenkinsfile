@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest .
+                        docker build --no-cache -t ${IMAGE_NAME}:latest .
                     """
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh """
                             echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin
-                            docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
+                            docker push ${IMAGE_NAME}:latest
                         """
                     }
                 }
@@ -71,7 +71,8 @@ pipeline {
             script {
                 // Cleanup any resources used
                 sh """
-                    docker rmi ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
+                    docker rmi ${IMAGE_NAME}:latest || true
+                    docker logout || true
                 """
             }
         }
