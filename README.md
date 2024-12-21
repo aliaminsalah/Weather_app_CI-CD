@@ -1,4 +1,6 @@
-# project
+# project "ODC - ORANGE "
+![My First Board - Frame 1](https://github.com/user-attachments/assets/20582e53-1e17-4f85-bdd6-384ed2817d2f)
+
 
 # WebApp Weather Pipeline Project " Version 1 "
 ## This project represents Version 1 of automating the deployment of a Python-based weather application using Docker, AWS EC2, Jenkins, and Ansible. Below is a breakdown of the work done, the tools used, and the project flow.
