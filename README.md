@@ -94,6 +94,8 @@ Push the Docker image to Docker Hub using Jenkins.
 Use Ansible to configure the EC2 instances, pull the Docker image, and run the application automatically.
 This setup represents a fully automated pipeline where the Python application code is deployed on AWS EC2 instances via containerization. The code and configurations are available in the GitHub repository.
 
+![image](https://github.com/user-attachments/assets/f7fdb802-f664-4171-a749-7b2475c19b22)
+
 ----------------------------------------------------------------------
 # WebApp Weather Pipeline Project "Version 2"
 
