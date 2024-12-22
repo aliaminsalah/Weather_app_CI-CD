@@ -22,7 +22,6 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    // Ensure any existing container is removed
                     sh """
                         docker rm -f ${CONTAINER_NAME} || true
                         docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
@@ -34,7 +33,6 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Verify the container is running
                     sh """
                         docker ps | grep ${CONTAINER_NAME}
                     """
@@ -46,27 +44,24 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        // sh """
-                           // echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin
-                            // docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
-                        //"""
-                        sh """ 
-                            echo "this stage is done"
-                            """
+                       sh """
+                            echo " image pull done"
+                        """
                     }
                 }
             }
         }
 
-       stage('Apply Terraform') {
-    steps {
-        script {
-            withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh """
-                    terraform init
-                    terraform plan -out=tfplan
-                    terraform apply -auto-approve tfplan
-                """
+        stage('Apply Terraform') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh """
+                            terraform init
+                            terraform plan -out=tfplan
+                            terraform apply -auto-approve tfplan
+                        """
+                    }
                 }
             }
         }
@@ -75,7 +70,6 @@ pipeline {
     post {
         always {
             script {
-                // Cleanup any resources used
                 sh """
                     docker rm --force ${CONTAINER_NAME} || true
                     docker rmi --force ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
