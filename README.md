@@ -1,5 +1,7 @@
 # project "ODC - ORANGE "
 ![My First Board - Frame 1](https://github.com/user-attachments/assets/20582e53-1e17-4f85-bdd6-384ed2817d2f)
+![Screenshot 2024-12-22 022854](https://github.com/user-attachments/assets/9bffd21d-2f0e-4f63-af6f-fd6ca6e879ff)
+
 
 
 # WebApp Weather Pipeline Project " Version 1 "
@@ -267,6 +269,13 @@ Unified Pipeline:
 The Bash script combines application lifecycle management (Docker build, test, push) with infrastructure deployment, providing a streamlined workflow.
 
 This version significantly improves scalability and reduces the potential for human error by automating both infrastructure and application deployment end-to-end.
+
+## Terraform With Jenkins:
+![image](https://github.com/user-attachments/assets/8e286aa0-3899-48ac-892c-c1480382d60a)
+
+![image](https://github.com/user-attachments/assets/0aaa1faf-d069-4435-a6b7-0b08a85dd233)
+![image](https://github.com/user-attachments/assets/34012db6-0932-44e6-a635-69f42a395825)
+
 
 ---------------
 Output File
