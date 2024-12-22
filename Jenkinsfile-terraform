@@ -58,14 +58,15 @@ pipeline {
             }
         }
 
-        stage('Apply Terraform') {
-            steps {
-                script {
-                    sh """
-                        terraform init
-                        terraform plan
-                        terraform apply -auto-approve
-                    """
+       stage('Apply Terraform') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh """
+                    terraform init
+                    terraform plan -out=tfplan
+                    terraform apply -auto-approve tfplan
+                """
                 }
             }
         }
