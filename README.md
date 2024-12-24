@@ -100,6 +100,7 @@ This setup represents a fully automated pipeline where the Python application co
 
 ----------------------------------------------------------------------
 # WebApp Weather Pipeline Project "Version 2"
+![diagram-export-12-24-2024-2_42_56-AM](https://github.com/user-attachments/assets/b4c7e483-5c03-4bac-88e9-3e3aa239a2c1)
 
 This project automates the deployment of a Python-based weather application using Docker, AWS EC2, and Ansible, replacing the Jenkins pipeline with a Bash script for managing the build and deployment process. The setup includes building a Docker image, pushing it to Docker Hub, and deploying it on two Ubuntu EC2 instances.
 
