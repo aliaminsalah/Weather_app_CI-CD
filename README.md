@@ -5,6 +5,8 @@
 
 
 # WebApp Weather Pipeline Project " Version 1 "
+![diagram-export-12-24-2024-2_08_07-AM](https://github.com/user-attachments/assets/8fccda63-9c4a-4aab-8c28-3cb692a42f1d)
+
 ## This project represents Version 1 of automating the deployment of a Python-based weather application using Docker, AWS EC2, Jenkins, and Ansible. Below is a breakdown of the work done, the tools used, and the project flow.
 
 ## Key Features
@@ -206,6 +208,8 @@ This setup eliminates the need for Jenkins by using a Bash script, streamlining 
 
 ------------------------------------------------------------------------------------
 # WebApp Weather Pipeline Project "Version 3"
+
+![diagram-export-12-24-2024-2_35_26-AM](https://github.com/user-attachments/assets/f9ba63f2-106f-4670-a964-8c86eb2bbeca)
 
 This version evolves the pipeline by introducing Terraform for Infrastructure as Code (IaC), replacing manual instance creation and configuration with automated provisioning and setup. The deployment pipeline uses a Bash script to manage Docker image building, testing, pushing, and infrastructure deployment.
 
