@@ -1,4 +1,4 @@
-# project "ODC - ORANGE "
+# Final project "ODC - ORANGE "
 ![My First Board - Frame 1](https://github.com/user-attachments/assets/20582e53-1e17-4f85-bdd6-384ed2817d2f)
 ![Screenshot 2024-12-22 022854](https://github.com/user-attachments/assets/9bffd21d-2f0e-4f63-af6f-fd6ca6e879ff)
 
